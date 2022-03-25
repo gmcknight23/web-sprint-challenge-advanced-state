@@ -13,11 +13,16 @@ import {
 
 const initialWheelState = 0;
 function wheel(state = initialWheelState, action) {
+  let cog;
   switch (action.type) {
     case MOVE_CLOCKWISE:
-      return cog < 5 ? cog + 1 : 0;
+      cog = state < 5 ? state + 1 : 0;
+      return cog;
+    //cog < 5 ? cog + 1 : 0
     case MOVE_COUNTERCLOCKWISE:
-      return cog !== 0 ? cog - 1 : 5;
+      cog = state !== 0 ? state - 1 : 5;
+      return cog;
+    //cog !== 0 ? cog - 1 : 5
     default:
       return state;
   }
@@ -27,7 +32,7 @@ const initialQuizState = null;
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
     case SET_QUIZ_INTO_STATE:
-      return null;
+      return action.payload;
     default:
       return state;
   }
@@ -37,7 +42,7 @@ const initialSelectedAnswerState = null;
 function selectedAnswer(state = initialSelectedAnswerState, action) {
   switch (action.type) {
     case SET_SELECTED_ANSWER:
-      return null;
+      return action.payload;
     default:
       return state;
   }
@@ -45,12 +50,7 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
 
 const initialMessageState = "";
 function infoMessage(state = initialMessageState, action) {
-  switch (action.type) {
-    case SET_INFO_MESSAGE:
-      return null;
-    default:
-      return state;
-  }
+  return state;
 }
 
 const initialFormState = {
@@ -59,10 +59,7 @@ const initialFormState = {
   newFalseAnswer: "",
 };
 function form(state = initialFormState, action) {
-  switch (action.type) {
-    default:
-      return state;
-  }
+  return state;
 }
 
 export default combineReducers({

@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { moveClockwise, moveCounterClockwise } from "../state/action-creators";
 
-export default function Wheel(props) {
-  const [cog, setCog] = useState(0);
+//test
 
-  const moveClockwise = () => {
-    cog < 5 ? setCog(cog + 1) : setCog(0);
-  };
+function Wheel({ cog, clockwiseMove, counterClockwiseMove }) {
+  console.log(cog);
+  // const [cog, setCog] = useState(0);
 
-  const moveCounterClockwise = () => {
-    cog !== 0 ? setCog(cog - 1) : setCog(5);
-  };
+  // const moveClockwise = () => {
+  //   cog < 5 ? setCog(cog + 1) : setCog(0);
+  // };
+
+  // const moveCounterClockwise = () => {
+  //   cog !== 0 ? setCog(cog - 1) : setCog(5);
+  // };
 
   return (
     <div id="wrapper">
@@ -37,13 +40,26 @@ export default function Wheel(props) {
         {/* --i is a custom CSS property, no need to touch that nor the style object */}
       </div>
       <div id="keypad">
-        <button id="counterClockwiseBtn" onClick={moveCounterClockwise}>
+        <button id="counterClockwiseBtn" onClick={counterClockwiseMove}>
           Counter clockwise
         </button>
-        <button id="clockwiseBtn" onClick={moveClockwise}>
+        <button id="clockwiseBtn" onClick={clockwiseMove}>
           Clockwise
         </button>
       </div>
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return { cog: state.wheel };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    clockwiseMove: () => dispatch(moveClockwise()),
+    counterClockwiseMove: () => dispatch(moveCounterClockwise()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wheel);

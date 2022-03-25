@@ -18,16 +18,16 @@ export function moveCounterClockwise() {
   return { type: MOVE_COUNTERCLOCKWISE };
 }
 
-export function selectAnswer() {
-  return { type: SET_SELECTED_ANSWER };
+export function selectAnswer(answerID) {
+  return { type: SET_SELECTED_ANSWER, payload: answerID };
 }
 
 export function setMessage() {
   return { type: SET_INFO_MESSAGE };
 }
 
-export function setQuiz() {
-  return { type: SET_QUIZ_INTO_STATE };
+export function setQuiz(data) {
+  return { type: SET_QUIZ_INTO_STATE, payload: data };
 }
 
 export function inputChange() {
@@ -47,8 +47,13 @@ export function fetchQuiz() {
 
     axios
       .get("http://localhost:9000/api/quiz/next")
-      .then((res) => {})
-      .catch((err) => {});
+      .then((res) => {
+        console.log(res);
+        dispatch(setQuiz(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 }
 export function postAnswer() {
@@ -59,9 +64,13 @@ export function postAnswer() {
     // - Dispatch the fetching of the next quiz
 
     axios
-      .post("http://localhost:9000/api/quiz/new")
-      .then((res) => {})
-      .catch((err) => {});
+      .post("http://localhost:9000/api/quiz/answer")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 }
 export function postQuiz() {
@@ -72,8 +81,12 @@ export function postQuiz() {
 
     axios
       .post("http://localhost:9000/api/quiz/new")
-      .then((res) => {})
-      .catch((err) => {});
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state
