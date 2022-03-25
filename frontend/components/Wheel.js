@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { moveClockwise, moveCounterClockwise } from "../state/action-creators";
 
 export default function Wheel(props) {
   const [cog, setCog] = useState(0);
