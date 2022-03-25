@@ -1,17 +1,42 @@
 // ❗ You don't need to add extra action creators to achieve MVP
-export function moveClockwise() { }
+import axios from "axios";
+import {
+  MOVE_CLOCKWISE,
+  MOVE_COUNTERCLOCKWISE,
+  SET_QUIZ_INTO_STATE,
+  SET_SELECTED_ANSWER,
+  SET_INFO_MESSAGE,
+  INPUT_CHANGE,
+  RESET_FORM,
+} from "../state/action-types";
 
-export function moveCounterClockwise() { }
+export function moveClockwise() {
+  return { type: MOVE_CLOCKWISE };
+}
 
-export function selectAnswer() { }
+export function moveCounterClockwise() {
+  return { type: MOVE_COUNTERCLOCKWISE };
+}
 
-export function setMessage() { }
+export function selectAnswer() {
+  return { type: SET_SELECTED_ANSWER };
+}
 
-export function setQuiz() { }
+export function setMessage() {
+  return { type: SET_INFO_MESSAGE };
+}
 
-export function inputChange() { }
+export function setQuiz() {
+  return { type: SET_QUIZ_INTO_STATE };
+}
 
-export function resetForm() { }
+export function inputChange() {
+  return { type: INPUT_CHANGE };
+}
+
+export function resetForm() {
+  return { type: RESET_FORM };
+}
 
 // ❗ Async action creators
 export function fetchQuiz() {
@@ -19,7 +44,12 @@ export function fetchQuiz() {
     // First, dispatch an action to reset the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
     // - Dispatch an action to send the obtained quiz to its state
-  }
+
+    axios
+      .get("http://localhost:9000/api/quiz/next")
+      .then((res) => {})
+      .catch((err) => {});
+  };
 }
 export function postAnswer() {
   return function (dispatch) {
@@ -27,13 +57,23 @@ export function postAnswer() {
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
-  }
+
+    axios
+      .post("http://localhost:9000/api/quiz/new")
+      .then((res) => {})
+      .catch((err) => {});
+  };
 }
 export function postQuiz() {
   return function (dispatch) {
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
-  }
+
+    axios
+      .post("http://localhost:9000/api/quiz/new")
+      .then((res) => {})
+      .catch((err) => {});
+  };
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state

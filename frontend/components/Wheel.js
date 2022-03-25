@@ -3,21 +3,14 @@ import React, { useState } from "react";
 export default function Wheel(props) {
   const [cog, setCog] = useState(0);
 
-  const clockwise = () => {
-    if (cog < 6) {
-      setCog(cog + 1);
-    } else {
-      setCog(0);
-    }
+  const moveClockwise = () => {
+    cog < 5 ? setCog(cog + 1) : setCog(0);
   };
 
-  const counterClockwise = () => {
-    if (cog > 0) {
-      setCog(cog - 1);
-    } else {
-      setCog(0);
-    }
+  const moveCounterClockwise = () => {
+    cog !== 0 ? setCog(cog - 1) : setCog(5);
   };
+
   return (
     <div id="wrapper">
       <div id="wheel">
@@ -42,10 +35,10 @@ export default function Wheel(props) {
         {/* --i is a custom CSS property, no need to touch that nor the style object */}
       </div>
       <div id="keypad">
-        <button id="counterClockwiseBtn" onClick={counterClockwise}>
+        <button id="counterClockwiseBtn" onClick={moveCounterClockwise}>
           Counter clockwise
         </button>
-        <button id="clockwiseBtn" onClick={clockwise}>
+        <button id="clockwiseBtn" onClick={moveClockwise}>
           Clockwise
         </button>
       </div>
